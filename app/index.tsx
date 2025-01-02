@@ -1,23 +1,19 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { ThemedView } from "@/components/ThemedView";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { switchTheme } from "@/store/slices/theme";
-import { useDispatch, useSelector } from "@/store";
+import { View, Image, Touchable, TouchableOpacity, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { whatsAppLogo } from "../constants/Images";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Button from "@/components/common/CustomButton";
+import CustomButton from "@/components/common/CustomButton";
+import FormField from "@/components/common/CustomForm";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const { theme } = useSelector((state) => state.themeReducer);
-
+  const [email, setEmail] = useState("");
   return (
-    <ParallaxScrollView>
-      <ThemedView>
-        <TouchableOpacity onPress={() => dispatch(switchTheme(theme === "dark" ? "light" : "dark"))}>
-          <Text>Button</Text>
-        </TouchableOpacity>
-        <Text className=" !text-[red] dark:!text-[green]">Home</Text>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView className="h-full">
+      <ScrollView>
+        
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

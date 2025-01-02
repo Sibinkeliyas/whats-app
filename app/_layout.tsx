@@ -15,12 +15,11 @@ import ThemeProvider from "@/context/ThemeProvider";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded,] = useFonts({
+  const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   useEffect(() => {
-
     if (loaded) {
       SplashScreen.hideAsync();
     }
@@ -32,14 +31,12 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+      <StatusBar style="auto" />
     </Provider>
   );
 }
