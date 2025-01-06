@@ -5,13 +5,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "@/components/common/CustomButton";
 import CustomButton from "@/components/common/CustomButton";
 import FormField from "@/components/common/CustomForm";
+import { Link } from "expo-router";
 
 const Home = () => {
   const [email, setEmail] = useState("");
   return (
     <SafeAreaView className="h-full">
       <ScrollView>
-        
+        <Link href='/(tabs)/(users)'>Home</Link>
       </ScrollView>
     </SafeAreaView>
   );
