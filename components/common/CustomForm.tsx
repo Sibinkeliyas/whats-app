@@ -1,7 +1,6 @@
-import { View, Text, TextInput, TouchableOpacity, Image, KeyboardTypeOptions } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardTypeOptions, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import Icon from "@expo/vector-icons/FontAwesome5";
-import { StyleSheet } from "nativewind";
 
 const FormField = ({
   handleChange,
@@ -29,8 +28,8 @@ const FormField = ({
         style={style.formFieldView}
       >
         <TextInput
-          style={{ outline: "none" }}
-          className="flex-1 text-white text-base  w-full border-none focus:!border-none border-2 focus:!outline-none h-full"
+          style={{ outline: "none", borderWidth: 0 }}
+          className="flex-1 text-[#0a0a0a] text-base  w-full border-none focus:!border-none border-2 focus:!outline-none h-full"
           value={value}
           placeholder={placeHolder}
           placeholderTextColor="#7B7B8B"
@@ -41,7 +40,7 @@ const FormField = ({
         />
 
         {secureTextEntry && (
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity onPressIn={() => setShowPassword(!showPassword)}>
             <Icon name={showPassword ? "eye-slash" : "eye"} />
           </TouchableOpacity>
         )}

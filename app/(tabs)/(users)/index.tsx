@@ -12,6 +12,7 @@ export default function HomeScreen() {
       setRefreshing(false);
     }, 2000);
   }, []);
+
   return (
     <SafeAreaView className="h-full bg-[#fff] pb-0" style={{ paddingBottom: 0, marginBottom: 0 }}>
       <ScrollView

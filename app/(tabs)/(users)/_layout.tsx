@@ -6,10 +6,11 @@ import HeaderLeft from "@/components/users-list/header/HeaderLeft";
 
 const UsersLayout = () => {
   return (
-    <Stack>
+    <Stack screenOptions={{ gestureEnabled: false }}>
       <Stack.Screen
         name="index"
         options={{
+          gestureEnabled: false,
           headerShown: true,
           headerLargeTitle: true,
           headerTitle: "Chats",
@@ -33,10 +34,10 @@ const UsersLayout = () => {
         options={{
           presentation: "modal",
           title: "New Chat",
-          headerTitleAlign:'center',
+          headerTitleAlign: "center",
           headerShadowVisible: false,
           headerStyle: { backgroundColor: "#f6f6f6" },
-          headerSearchBarOptions: {}
+          headerSearchBarOptions: {},
         }}
       />
     </Stack>
