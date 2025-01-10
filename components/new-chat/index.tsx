@@ -2,13 +2,14 @@ import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import { IconSymbol } from "../ui/IconSymbol.ios";
 import { IUsersProps } from "../users-list/Users";
+import Icon from "../ui/Icon";
 
 const menus: IItemProps[] = [
-  { title: "New group", image: "person.2", isIcon: true },
-  { title: "New contact", image: "person.badge.plus", isIcon: true },
-  { title: "New community", image: "person.3", isIcon: true },
-  { title: "Chat with AIs", image: "storefront", isIcon: true },
-  { title: "New broadcast", image: "megaphone", isIcon: true },
+  { title: "New group", iosImage: "person.2", androidImage: "account", isIcon: true },
+  { title: "New contact", iosImage: "person.badge.plus", androidImage: "home-group", isIcon: true },
+  { title: "New community", iosImage: "person.3", androidImage: "t", isIcon: true },
+  { title: "Chat with AIs", iosImage: "storefront", androidImage: "chat", isIcon: true },
+  { title: "New broadcast", iosImage: "megaphone", androidImage: "voicemail", isIcon: true },
 ];
 
 const frequentlyChates = [
@@ -21,7 +22,12 @@ const frequentlyChates = [
   { id: 7, title: "David Wilson", image: require("../../assets/images/default-image.png"), subTitle: "Howdy" },
   { id: 8, title: "Sophia Moore", image: require("../../assets/images/default-image.png"), subTitle: "Hi there" },
   { id: 9, title: "Liam Anderson", image: require("../../assets/images/default-image.png"), subTitle: "Hello!" },
-  { id: 10, title: "Olivia Taylor", image: require("../../assets/images/default-image.png"), subTitle: "Nice to meet you" },
+  {
+    id: 10,
+    title: "Olivia Taylor",
+    image: require("../../assets/images/default-image.png"),
+    subTitle: "Nice to meet you",
+  },
 ];
 
 const NewChat = () => {
@@ -57,7 +63,9 @@ const Card = ({ items, title }: { items: IItemProps[]; title?: string }) => {
 
 interface IItemProps {
   title: string;
-  image: any;
+  image?: any;
+  iosImage?: any;
+  androidImage?: any;
   subTitle?: string;
   isIcon?: boolean;
 }
@@ -67,7 +75,12 @@ const Item = ({ item, index, itemsLength }: { item: IItemProps; index: number; i
     <TouchableOpacity className="justify-between items-center flex-row w-full ">
       <View className="w-[15%] justify-center items-center flex-row ">
         {item.isIcon ? (
-          <IconSymbol name={item.image} color="#1DAB61" />
+          <Icon
+            iosIconName={item.iosImage}
+            androidIconName={item.androidImage}
+            iosColor="#1DAB61"
+            androidColor="#1DAB61"
+          />
         ) : (
           <Image
             source={item.image as any}
@@ -77,7 +90,11 @@ const Item = ({ item, index, itemsLength }: { item: IItemProps; index: number; i
           />
         )}
       </View>
-      <View className={`w-[82%] py-[12px] relative pl-3 ${index === itemsLength - 1 ? "" : " border-[#767779] border-b-[.2px]"}`}>
+      <View
+        className={`w-[82%] py-[12px] relative pl-3 ${
+          index === itemsLength - 1 ? "" : " border-[#767779] border-b-[.2px]"
+        }`}
+      >
         <Text className="text-[#0A0A0A]  text-[16px]">{item.title}</Text>
         {item.subTitle && (
           <Text className="text-[#767779] text-[14px] max-w-[90%] text-nowrap  overflow-hidden text-ellipsis ">

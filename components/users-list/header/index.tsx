@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { IconSymbol } from "@/components/ui/IconSymbol.ios";
+import Icon from "@/components/ui/Icon";
 
 const tabs = ["All", "Unread", "Favourites", "Groups"];
 
@@ -25,7 +26,7 @@ const Header = () => {
       </View>
       <View className="justify-between items-center flex-row w-full ">
         <View className="w-[15%] justify-center items-center flex-row ">
-          <IconSymbol name="archivebox" color="#767779" style={{ marginHorizontal: "auto" }} />
+          <Icon iosIconName="archivebox" androidIconName="archive-alert-outline" style={{ marginHorizontal: "auto" }} />
         </View>
         <View className="border-b border-[#00000033] w-[85%] pl-5 py-[12px]">
           <Text className="text-[#0A0A0A] font-semibold text-[16px]">Archived</Text>

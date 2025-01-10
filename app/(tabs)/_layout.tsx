@@ -10,6 +10,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import HeaderRight from "@/components/users-list/header/HeaderRight";
 import HeaderLeft from "@/components/users-list/header/HeaderLeft";
 import AuthGuard from "@/utils/routeGuard/AuthGuard";
+import Icon from "@/components/ui/Icon";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -32,8 +33,14 @@ export default function TabLayout() {
           name="Status"
           options={{
             title: "Updates",
+            tabBarActiveTintColor: "#0a0a0a",
             tabBarIcon: ({ color, focused }) => (
-              <IconSymbol size={28} name={focused ? "repeat.circle.fill" : "repeat"} color={color} />
+              <Icon
+                iosIconName={focused ? "repeat.circle.fill" : "repeat"}
+                androidIconName={focused ? "repeat" : "repeat-variant"}
+                iosColor={color}
+                androidColor={focused ? "#0a0a0a" : color}
+              />
             ),
           }}
         />
@@ -41,14 +48,30 @@ export default function TabLayout() {
           name="Calls"
           options={{
             title: "Calls",
-            tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name={focused ? "phone.fill" : "phone"} color={color} />,
+            tabBarActiveTintColor: "#0a0a0a",
+            tabBarIcon: ({ color, focused }) => (
+              <Icon
+                iosIconName={focused ? "phone.fill" : "phone"}
+                androidIconName={focused ? "phone" : "phone-outline"}
+                iosColor={color}
+                androidColor={focused ? "#0a0a0a" : color}
+              />
+            ),
           }}
         />
         <Tabs.Screen
           name="Communities"
           options={{
             title: "Communities",
-            tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name={focused ? "tag.fill" : "tag"} color={color} />,
+            tabBarActiveTintColor: "#0a0a0a",
+            tabBarIcon: ({ color, focused }) => (
+              <Icon
+                iosIconName={focused ? "tag.fill" : "tag"}
+                androidIconName={focused ? "tag" : "tag-outline"}
+                iosColor={color}
+                androidColor={focused ? "#0a0a0a" : color}
+              />
+            ),
           }}
         />
         <Tabs.Screen
@@ -59,9 +82,14 @@ export default function TabLayout() {
             headerTitleStyle: {
               display: "none",
             },
-
+            tabBarActiveTintColor: "#0a0a0a",
             tabBarIcon: ({ color, focused }) => (
-              <IconSymbol size={28} name={focused ? "message.fill" : "message"} color={color} />
+              <Icon
+                iosIconName={focused ? "message.fill" : "message"}
+                androidIconName={focused ? "chat" : "chat-outline"}
+                androidColor={focused ? "#0a0a0a" : color}
+                iosColor={color}
+              />
             ),
             headerLeftContainerStyle: {
               paddingLeft: 20,
@@ -78,7 +106,15 @@ export default function TabLayout() {
           name="Settings"
           options={{
             title: "Settings",
-            tabBarIcon: ({ color, focused }) => <IconSymbol size={28} name={focused ? "seal.fill" : "seal"} color={color} />,
+            tabBarActiveTintColor: "#0a0a0a",
+            tabBarIcon: ({ color, focused }) => (
+              <Icon
+                iosIconName={focused ? "seal.fill" : "seal"}
+                androidIconName={focused ? "wifi-settings" : "wifi-settings"}
+                iosColor={color}
+                androidColor={focused ? "#0a0a0a" : color}
+              />
+            ),
           }}
         />
       </Tabs>
