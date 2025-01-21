@@ -14,6 +14,8 @@ import ThemeProvider from "@/context/ThemeProvider";
 import JwtContext from "@/context/JwtContext";
 import AuthGuard from "@/utils/routeGuard/AuthGuard";
 import LoginGuard from "@/utils/routeGuard/LoginGuard";
+import { Platform } from "react-native";
+import CameraHeader from "@/components/users-list/camera-header";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -40,6 +42,13 @@ export default function RootLayout() {
           <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            {/* camera */}
+            <Stack.Screen
+              name="Camera"
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />

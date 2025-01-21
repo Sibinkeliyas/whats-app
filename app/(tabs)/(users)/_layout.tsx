@@ -3,6 +3,7 @@ import React from "react";
 import { router, Stack } from "expo-router";
 import HeaderRight from "@/components/users-list/header/HeaderRight";
 import HeaderLeft from "@/components/users-list/header/HeaderLeft";
+import Icon from "@/components/ui/Icon";
 
 const UsersLayout = () => {
   return (
@@ -17,7 +18,7 @@ const UsersLayout = () => {
           headerTitleAlign: Platform.OS === "ios" ? undefined : "center",
           headerSearchBarOptions: {
             placeholder: "Search",
-            hideWhenScrolling: true,
+            // hideWhenScrolling: true,
           },
           headerTransparent: true,
           headerBlurEffect: Platform.OS === "ios" ? "regular" : undefined, // iOS only
@@ -39,7 +40,13 @@ const UsersLayout = () => {
           headerStyle: { backgroundColor: "#f6f6f6" },
           headerSearchBarOptions: {
             hideWhenScrolling: true,
+            placeholder: "Search",
           },
+          headerLeft: () => (
+            <TouchableOpacity onPressIn={() => router.back()}>
+              <Icon androidIconName="close" iosColor="gray" iosIconName="x.circle" androidColor="gray" />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Stack>

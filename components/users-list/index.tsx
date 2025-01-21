@@ -6,7 +6,7 @@ import UsersList from "./Users";
 
 const Users = () => {
   return (
-    <ThemedView className="relative">
+    <ThemedView className="relative flex-1">
       <Header />
       <UsersList />
     </ThemedView>
