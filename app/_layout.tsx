@@ -7,15 +7,10 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import ThemeProvider from "@/context/ThemeProvider";
 import JwtContext from "@/context/JwtContext";
-import AuthGuard from "@/utils/routeGuard/AuthGuard";
-import LoginGuard from "@/utils/routeGuard/LoginGuard";
 import { Platform } from "react-native";
-import CameraHeader from "@/components/users-list/camera-header";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -47,6 +42,19 @@ export default function RootLayout() {
               name="Camera"
               options={{
                 headerShown: false,
+              }}
+            />
+            <Stack.Screen name="users" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="Album"
+              options={{
+                animation: Platform.OS == "ios" ? undefined : "fade_from_bottom",
+                animationDuration: Platform.OS == "ios" ? undefined : 70,
+                presentation: "modal",
+                title: "Albums",
+                headerTitleAlign: "center",
+                headerShadowVisible: false,
+                headerStyle: { backgroundColor: "#f6f6f6" },
               }}
             />
             <Stack.Screen name="+not-found" />

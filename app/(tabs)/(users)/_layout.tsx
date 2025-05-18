@@ -7,7 +7,7 @@ import Icon from "@/components/ui/Icon";
 
 const UsersLayout = () => {
   return (
-    <Stack screenOptions={{ gestureEnabled: false }}>
+    <Stack>
       <Stack.Screen
         name="index"
         options={{

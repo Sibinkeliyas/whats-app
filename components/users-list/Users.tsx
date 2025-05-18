@@ -171,26 +171,26 @@ export default UsersList;
 
 const Item = ({ user }: { user: IUsersProps }) => {
   return (
-    <TouchableOpacity className="justify-between items-center flex-row w-full ">
+    <TouchableOpacity className="justify-between items-center flex-row w-full " onPress={() => router.push(`/users/${user.id}`)}>
       <View className="w-[15%] justify-center items-center flex-row ">
-        <Image
-          source={user.profileImage as any}
-          className="w-[25px] h-[25px] rounded-lg"
-          style={{ width: 50, height: 50, borderRadius: 50 }}
-          resizeMode="cover"
-        />
+      <Image
+        source={user.profileImage as any}
+        className="w-[25px] h-[25px] rounded-lg"
+        style={{ width: 50, height: 50, borderRadius: 50 }}
+        resizeMode="cover"
+      />
       </View>
       <View className="border-b border-[#00000033] w-[85%] py-[12px] relative pl-5">
-        <View className="flex-row justify-between items-center">
-          <Text className="text-[#0A0A0A] font-semibold text-[16px]">{user.userName}</Text>
-          <Text className="text-[#767779] text-[14px]">{user.lastMessagedTime}</Text>
-        </View>
-        <View className="w-full mt-1 ml-auto justify-between items-center flex-row">
-          <Text className="text-[#767779] text-[14px] max-w-[90%] text-nowrap  overflow-hidden text-ellipsis ">
-            {user.message}
-          </Text>
-          <IconSymbol name="pin.circle" color="#767779" />
-        </View>
+      <View className="flex-row justify-between items-center">
+        <Text className="text-[#0A0A0A] font-semibold text-[16px]">{user.userName}</Text>
+        <Text className="text-[#767779] text-[14px]">{user.lastMessagedTime}</Text>
+      </View>
+      <View className="w-full mt-1 ml-auto justify-between items-center flex-row">
+        <Text className="text-[#767779] text-[14px] max-w-[90%] text-nowrap  overflow-hidden text-ellipsis ">
+        {user.message}
+        </Text>
+        <IconSymbol name="pin.circle" color="#767779" />
+      </View>
       </View>
     </TouchableOpacity>
   );

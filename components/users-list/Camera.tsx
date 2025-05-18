@@ -1,10 +1,11 @@
 import React, { LegacyRef, RefObject, useEffect, useRef } from "react";
-import { CameraView, CameraType, useCameraPermissions, CameraMode, Camera } from "expo-camera";
+import { CameraView, CameraType, useCameraPermissions, CameraMode, Camera} from "expo-camera";
 import { useState } from "react";
 import { Alert, Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "../ui/Icon";
 import { router } from "expo-router";
 import * as MediaLibrary from "expo-media-library";
+import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { useVideoPlayer, VideoView } from "expo-video";
@@ -25,30 +26,38 @@ export default function Cameras() {
   const [record, setRecord] = useState("");
   const cameraRef = useRef<CameraView | null>(null);
   const [previewVideo, setPreviewVideo] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
 
   if (!permission) {
     // Camera permissions are still loading.
     return <View />;
   }
 
-  if (!permission.granted) {
-    // Camera permissions are not granted yet.
+  // if (!permission.granted) {
+  //   // Camera permissions are not granted yet.
 
-    {
-      Alert.alert("Alert Title", "My Alert Msg", [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        { text: "OK", onPress: requestPermission },
-      ]);
-    }
-  }
+  //   {
+  //     Alert.alert("Alert Title", "My Alert Msg", [
+  //       {
+  //         text: "Cancel",
+  //         onPress: () => console.log("Cancel Pressed"),
+  //         style: "cancel",
+  //       },
+  //       { text: "OK", onPress: requestPermission },
+  //     ]);
+  //   }
+  // }
 
   function toggleCameraFacing() {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
+
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const data = await cameraRef.current.takePictureAsync();
+      console.log(data?.uri);
+    }
+  };
 
   async function getAlbums() {
     if (permissionResponse?.status !== "granted") {
@@ -60,6 +69,22 @@ export default function Cameras() {
     setShowAlbums(true);
     setAlbums(fetchedAlbums);
   }
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images", "videos"],
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   const handleVideo = async () => {
     setCameraMode("video");
@@ -137,11 +162,12 @@ export default function Cameras() {
                 enableTorch={flashLight}
               ></CameraView>
               <View style={styles.buttonContainer} className="w-full justify-between items-center flex-row absolute bottom-14">
-                <TouchableOpacity style={styles.button} onPress={getAlbums}>
+                <TouchableOpacity style={styles.button} onPress={pickImage}>
                   <Icon androidIconName="view-gallery" iosIconName="photo.artframe" androidColor="#ffff" iosColor="#ffff" />
                 </TouchableOpacity>
                 <View className="justify-center items-center gap-5 flex-row ">
                   <TouchableOpacity
+                    onPress={() => takePicture()}
                     style={{ ...styles.button }}
                     onLongPress={() => handleVideo()}
                     className=" p-1 border-4 border-[#fff] !w-[60px] rounded-[50%] !h-[60px] "
@@ -185,7 +211,7 @@ function AlbumEntry({ album, index }: { album: MediaLibrary.Album; index: number
       <Text>
         {album.title} - {album.assetCount ?? "no"} assets
       </Text>
-      <View className="bg-red-500 h-[100px]">
+      <View className="w-full h-[100px] flex-row justify-between items-center px-2">
         {assets &&
           assets.map((asset, index) => {
             return (
@@ -214,19 +240,7 @@ function VideoScreen({ source }: { source: string }) {
 
   return (
     <View style={styles.videoContainer}>
-      <VideoView style={styles.video} player={player} allowsFullscreen allowsPictureInPicture />
-      <View style={styles.controlsContainer}>
-        <Button
-          title={isPlaying ? "Pause" : "Play"}
-          onPress={() => {
-            if (isPlaying) {
-              player.pause();
-            } else {
-              player.play();
-            }
-          }}
-        />
-      </View>
+      <VideoView showsTimecodes contentFit="fill" style={styles.video} player={player} allowsFullscreen allowsPictureInPicture />
     </View>
   );
 }
@@ -265,6 +279,8 @@ const styles = StyleSheet.create({
   },
   video: {
     flex: 1,
+    height: "100%",
+    width: "100%",
   },
   controlsContainer: {
     position: "absolute",
